@@ -39,7 +39,7 @@ export class ProductAddComponent implements OnInit {
       let productModel = Object.assign({}, this.productAddForm.value);
       this.productService.add(productModel).subscribe(
         (response) => {
-          this.toastrService.success(response.message, 'Başarılı');
+          this.toastrService.success(response.message, 'Gönderim Başarılı');
         },
         (responseError) => {
           if (responseError.error.Errors.length > 0) {
