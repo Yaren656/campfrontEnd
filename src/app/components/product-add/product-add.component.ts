@@ -5,6 +5,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms'; //form html ile ilişkilendirmek için.
+import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-add',
@@ -13,18 +15,36 @@ import {
 })
 export class ProductAddComponent implements OnInit {
   productAddForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.createProductAddForm()
+    this.createProductAddForm();
   }
 
   createProductAddForm() {
     this.productAddForm = this.formBuilder.group({
-      productName:["",Validators.required],
-      unitPrice:["",Validators.required],
-      unitsInStock:["",Validators.required],
-      categoryId:["",Validators.required]
-    })
+      productName: ['', Validators.required],
+      unitPrice: ['', Validators.required],
+      unitsInStock: ['', Validators.required],
+      categoryId: ['', Validators.required],
+    });
+  }
+
+  add() {
+    if (this.productAddForm.valid) {
+      let productModel = Object.assign({}, this.productAddForm.value);
+      this.productService.add(productModel).subscribe((response) => {
+        this.toastrService.success(response.message, 'Başarılı');
+      },responseError=>{
+        console.log(responseError.error)
+        this.toastrService.error(responseError.error)
+      });
+    } else {
+      this.toastrService.error('Formunuz eksik', 'Lütfen kontrol ediniz.');
+    }
   }
 }
