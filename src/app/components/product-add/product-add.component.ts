@@ -40,7 +40,7 @@ export class ProductAddComponent implements OnInit {
       this.productService.add(productModel).subscribe((response) => {
         this.toastrService.success(response.message, 'Başarılı');
       },responseError=>{
-        console.log(responseError.error)
+        console.log(responseError)
         this.toastrService.error(responseError.error)
       });
     } else {
