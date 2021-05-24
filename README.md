@@ -1,3 +1,10 @@
+MyFinalProject'in front-end kısmı. Bu bölümü Angular ile geliştirdik. Detaylı kullanımlar için inceleyebilirsiniz.
+
+
+This is the front-end of the MyFinalProject. For this part we used Angular. For more details you can check inner side of the project. 
+
+--------------------------------------------------
+
 # Northwind
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
